@@ -6063,7 +6063,7 @@ GameObject:
   - component: {fileID: 860172463}
   - component: {fileID: 860172467}
   m_Layer: 0
-  m_Name: Characters_Sprite_Sheet_Finishe_0
+  m_Name: Steve
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
