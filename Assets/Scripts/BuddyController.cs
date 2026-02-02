@@ -54,6 +54,13 @@ public class BuddyController : MonoBehaviour
             spriteRenderer.flipX= true;
         }
 
+        if (animator)
+        {
+            animator.SetFloat("moveX", Mathf.Abs(rigidBody.linearVelocity.x));
+            animator.SetBool("isJumping", !isGrounded);
+
+        }
+
         RaycastHit2D hit = Physics2D.Raycast(groundCheckPos.position, Vector2.down, groundCheckLength, groundCheckLayerMask);
 
         if (hit.collider)
