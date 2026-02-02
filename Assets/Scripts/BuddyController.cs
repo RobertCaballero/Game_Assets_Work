@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngineInternal;
 
 public class BuddyController : MonoBehaviour
 {
@@ -15,10 +16,14 @@ public class BuddyController : MonoBehaviour
     public float moveSpeed = 5;
     public float jumpForce = 10;
 
+    public Transform groundCheckPos;
+    private float groundCheckLength = 0.25f;
+    public LayerMask groundCheckLayerMask;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        rigidBody = GetComponent<Rigidbody2D>();
+        rigidBody = GetComponent<Rigidbody2D>(); 
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
@@ -30,7 +35,7 @@ public class BuddyController : MonoBehaviour
 
         // Set facing direction
 
-        if (inputX > 0)
+        if (inputX > 0) 
         {
             facing = 1;
         }
@@ -49,7 +54,19 @@ public class BuddyController : MonoBehaviour
             spriteRenderer.flipX= true;
         }
 
-        if (Input.GetButtonDown("Jump"))
+        RaycastHit2D hit = Physics2D.Raycast(groundCheckPos.position, Vector2.down, groundCheckLength, groundCheckLayerMask);
+
+        if (hit.collider)
+        {
+            isGrounded = true;
+        }
+        else
+        {
+            isGrounded = false;
+        }
+
+
+        if (Input.GetButtonDown("Jump") && isGrounded)
         {
             rigidBody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse); //We add a force to the rigid body so it lifts the character upwards 
         }
