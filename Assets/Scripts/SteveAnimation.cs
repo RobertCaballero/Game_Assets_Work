@@ -5,6 +5,7 @@ public class SteveAnimation : MonoBehaviour
 
     public Rigidbody2D rigidBody;
     public Animator animator;
+    public Camera follow;
 
     private Vector2 input;
     public float speed = 2f;
